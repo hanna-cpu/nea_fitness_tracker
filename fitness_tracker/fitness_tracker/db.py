@@ -275,3 +275,157 @@ def get_progress_summary(user_id: int, today: str) -> dict:
         }
     finally:
         conn.close()
+
+
+def _last_n_dates(days: int) -> list[str]:
+    from datetime import date, timedelta
+
+    today = date.today()
+    return [(today - timedelta(days=i)).isoformat() for i in range(days - 1, -1, -1)]
+
+
+def get_weight_series(user_id: int, limit: int = 14) -> list[sqlite3.Row]:
+    """Chronological (oldest -> newest) weight entries, for a trend line."""
+    conn = get_connection()
+    try:
+        rows = conn.execute(
+            "SELECT date, weight_kg FROM WeightRecord WHERE user_id = ? "
+            "ORDER BY date DESC, weight_id DESC LIMIT ?",
+            (user_id, limit),
+        ).fetchall()
+        return list(reversed(rows))
+    finally:
+        conn.close()
+
+
+def get_daily_steps_series(user_id: int, days: int = 7) -> list[dict]:
+    conn = get_connection()
+    try:
+        dates = _last_n_dates(days)
+        rows = conn.execute(
+            "SELECT date, SUM(step_count) AS total FROM StepRecord "
+            "WHERE user_id = ? AND date >= ? GROUP BY date",
+            (user_id, dates[0]),
+        ).fetchall()
+        totals = {row["date"]: row["total"] for row in rows}
+        return [{"date": d, "steps": totals.get(d, 0)} for d in dates]
+    finally:
+        conn.close()
+
+
+def get_daily_workout_minutes_series(user_id: int, days: int = 7) -> list[dict]:
+    conn = get_connection()
+    try:
+        dates = _last_n_dates(days)
+        rows = conn.execute(
+            "SELECT date, SUM(duration_minutes) AS total FROM WorkoutRecord "
+            "WHERE user_id = ? AND date >= ? GROUP BY date",
+            (user_id, dates[0]),
+        ).fetchall()
+        totals = {row["date"]: row["total"] for row in rows}
+        return [{"date": d, "minutes": totals.get(d, 0)} for d in dates]
+    finally:
+        conn.close()
+
+
+def get_daily_calories_series(user_id: int, days: int = 7) -> list[dict]:
+    conn = get_connection()
+    try:
+        dates = _last_n_dates(days)
+        rows = conn.execute(
+            "SELECT date, SUM(calories_consumed) AS consumed, SUM(calories_burned) AS burned "
+            "FROM CalorieRecord WHERE user_id = ? AND date >= ? GROUP BY date",
+            (user_id, dates[0]),
+        ).fetchall()
+        totals = {row["date"]: (row["consumed"] or 0, row["burned"] or 0) for row in rows}
+        return [
+            {
+                "date": d,
+                "consumed": totals.get(d, (0, 0))[0],
+                "burned": totals.get(d, (0, 0))[1],
+            }
+            for d in dates
+        ]
+    finally:
+        conn.close()
+
+
+def has_logged_activity_today(user_id: int, today: str) -> bool:
+    """True if the user has logged a workout, weight, calorie or step entry today."""
+    conn = get_connection()
+    try:
+        row = conn.execute(
+            """
+            SELECT
+                EXISTS(SELECT 1 FROM WorkoutRecord WHERE user_id = ? AND date = ?)
+                OR EXISTS(SELECT 1 FROM WeightRecord WHERE user_id = ? AND date = ?)
+                OR EXISTS(SELECT 1 FROM CalorieRecord WHERE user_id = ? AND date = ?)
+                OR EXISTS(SELECT 1 FROM StepRecord WHERE user_id = ? AND date = ?)
+            """,
+            (user_id, today, user_id, today, user_id, today, user_id, today),
+        ).fetchone()
+        return bool(row[0])
+    finally:
+        conn.close()
+
+
+def create_notification(user_id: int, type: str, message: str) -> None:
+    conn = get_connection()
+    try:
+        conn.execute(
+            "INSERT INTO Notification (user_id, type, message) VALUES (?, ?, ?)",
+            (user_id, type, message),
+        )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def ensure_daily_activity_reminder(user_id: int, today: str) -> None:
+    """Create today's "no activity logged" reminder once, if it's warranted and
+    doesn't already exist - called on every Home page load, so it must not spam.
+    """
+    if has_logged_activity_today(user_id, today):
+        return
+    conn = get_connection()
+    try:
+        already_sent = conn.execute(
+            """
+            SELECT 1 FROM Notification
+            WHERE user_id = ? AND type = 'activity_reminder' AND date(date_created) = ?
+            """,
+            (user_id, today),
+        ).fetchone()
+        if already_sent:
+            return
+    finally:
+        conn.close()
+    create_notification(
+        user_id,
+        "activity_reminder",
+        "You haven't logged any activity today. Add your workout, weight, calories or steps to stay on track!",
+    )
+
+
+def get_unread_notifications(user_id: int) -> list[sqlite3.Row]:
+    conn = get_connection()
+    try:
+        return conn.execute(
+            "SELECT * FROM Notification WHERE user_id = ? AND is_read = 0 "
+            "ORDER BY date_created DESC",
+            (user_id,),
+        ).fetchall()
+    finally:
+        conn.close()
+
+
+def mark_notification_read(notification_id: int) -> None:
+    conn = get_connection()
+    try:
+        conn.execute(
+            "UPDATE Notification SET is_read = 1 WHERE notification_id = ?",
+            (notification_id,),
+        )
+        conn.commit()
+    finally:
+        conn.close()

@@ -9,6 +9,11 @@ WORKOUT_TYPES = ["Running", "Cycling", "Swimming", "Weight Training", "Yoga", "O
 
 
 class AddFitnessDataState(State):
+    workout_dialog_open: bool = False
+    weight_dialog_open: bool = False
+    calories_dialog_open: bool = False
+    steps_dialog_open: bool = False
+
     workout_type: str = ""
     workout_duration: str = ""
     workout_date: str = ""
@@ -26,6 +31,22 @@ class AddFitnessDataState(State):
     steps_value: str = ""
     steps_date: str = ""
     steps_message: str = ""
+
+    def set_workout_dialog_open(self, value: bool):
+        self.workout_dialog_open = value
+        self.workout_message = ""
+
+    def set_weight_dialog_open(self, value: bool):
+        self.weight_dialog_open = value
+        self.weight_message = ""
+
+    def set_calories_dialog_open(self, value: bool):
+        self.calories_dialog_open = value
+        self.calories_message = ""
+
+    def set_steps_dialog_open(self, value: bool):
+        self.steps_dialog_open = value
+        self.steps_message = ""
 
     def set_workout_type(self, value: str):
         self.workout_type = value
@@ -78,7 +99,8 @@ class AddFitnessDataState(State):
             return
         db.add_workout_record(self.user_id, self.workout_type, duration, self.workout_date)
         self.workout_duration = ""
-        self.workout_message = "Saved."
+        self.workout_message = ""
+        self.workout_dialog_open = False
 
     def save_weight(self):
         self.weight_message = ""
@@ -92,7 +114,8 @@ class AddFitnessDataState(State):
             return
         db.add_weight_record(self.user_id, weight, self.weight_date)
         self.weight_value = ""
-        self.weight_message = "Saved."
+        self.weight_message = ""
+        self.weight_dialog_open = False
 
     def save_calories(self):
         self.calories_message = ""
@@ -111,7 +134,8 @@ class AddFitnessDataState(State):
         db.add_calorie_record(self.user_id, consumed, burned, self.calories_date)
         self.calories_consumed = ""
         self.calories_burned = ""
-        self.calories_message = "Saved."
+        self.calories_message = ""
+        self.calories_dialog_open = False
 
     def save_steps(self):
         self.steps_message = ""
@@ -125,4 +149,5 @@ class AddFitnessDataState(State):
             return
         db.add_step_record(self.user_id, steps, self.steps_date)
         self.steps_value = ""
-        self.steps_message = "Saved."
+        self.steps_message = ""
+        self.steps_dialog_open = False

@@ -6,7 +6,7 @@ from .register_state import RegisterState
 def register() -> rx.Component:
     return rx.center(
         rx.vstack(
-            rx.heading("Register", size="7", color_scheme="blue"),
+            rx.heading("Register", size="7", color_scheme="violet"),
             rx.cond(
                 RegisterState.error != "",
                 rx.callout(
@@ -63,18 +63,20 @@ def register() -> rx.Component:
                 on_click=RegisterState.handle_register,
                 width="100%",
                 size="3",
-                color_scheme="blue",
+                color_scheme="violet",
             ),
             rx.hstack(
                 rx.text("Already have an account?", color="gray"),
-                rx.link("Login", href="/login", color_scheme="blue", weight="bold"),
+                rx.link("Login", href="/login", color_scheme="violet", weight="bold"),
                 spacing="2",
             ),
             spacing="4",
             width="24em",
             padding="2em",
+            background="var(--color-panel-solid)",
             border="1px solid var(--gray-6)",
             border_radius="var(--radius-4)",
         ),
         height="100vh",
+        background="linear-gradient(135deg, var(--blue-3), var(--purple-3))",
     )

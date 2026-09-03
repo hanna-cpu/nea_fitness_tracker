@@ -13,14 +13,14 @@ from .home_state import HomeState
 from .landing_page import landing
 from .login_page import login
 from .login_state import LoginState
-from .progress_tracker_page import progress_tracker
-from .progress_tracker_state import ProgressTrackerState
 from .register_page import register
 from .register_state import RegisterState
+from .app_state import State
 
 app = rx.App(
     theme=rx.theme(
-        accent_color="blue",
+        accent_color="violet",
+        gray_color="slate",
         radius="large",
     )
 )
@@ -28,25 +28,24 @@ app = rx.App(
 app.add_page(landing, route="/")
 app.add_page(login, route="/login", on_load=LoginState.check_already_logged_in)
 app.add_page(register, route="/register", on_load=RegisterState.check_already_logged_in)
-app.add_page(home, route="/home", on_load=HomeState.check_login)
+app.add_page(home, route="/home", on_load=HomeState.load_home)
 app.add_page(
     account_settings,
     route="/account-settings",
-    on_load=AccountSettingsState.load_user,
+    on_load=[AccountSettingsState.load_user, State.refresh_notifications],
 )
 app.add_page(
     add_fitness_data,
     route="/add-fitness-data",
-    on_load=AddFitnessDataState.load_defaults,
+    on_load=[AddFitnessDataState.load_defaults, State.refresh_notifications],
 )
 app.add_page(
     fitness_goals,
     route="/fitness-goals",
-    on_load=FitnessGoalsState.load_goals,
+    on_load=[FitnessGoalsState.load_goals, State.refresh_notifications],
 )
 app.add_page(
-    progress_tracker,
-    route="/progress-tracker",
-    on_load=ProgressTrackerState.load_progress,
+    history,
+    route="/history",
+    on_load=[HistoryState.load_history, State.refresh_notifications],
 )
-app.add_page(history, route="/history", on_load=HistoryState.load_history)

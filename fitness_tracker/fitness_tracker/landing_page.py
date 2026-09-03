@@ -6,7 +6,7 @@ import reflex as rx
 def landing() -> rx.Component:
     return rx.center(
         rx.vstack(
-            rx.heading("Fitness Tracker", size="9", color_scheme="blue"),
+            rx.heading("Fitness Tracker", size="9", color_scheme="violet"),
             rx.text(
                 "Log workouts, weight, calories and steps in one place. "
                 "Set goals, track your progress, and stay on top of your fitness.",
@@ -17,11 +17,11 @@ def landing() -> rx.Component:
             ),
             rx.hstack(
                 rx.link(
-                    rx.button("Login", size="4", color_scheme="blue"),
+                    rx.button("Login", size="4", color_scheme="violet"),
                     href="/login",
                 ),
                 rx.link(
-                    rx.button("Register", size="4", variant="outline", color_scheme="blue"),
+                    rx.button("Register", size="4", variant="outline", color_scheme="violet"),
                     href="/register",
                 ),
                 spacing="4",
@@ -31,4 +31,5 @@ def landing() -> rx.Component:
         ),
         height="100vh",
         padding="2em",
+        background="linear-gradient(135deg, var(--blue-3), var(--purple-3))",
     )
