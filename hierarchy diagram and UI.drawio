@@ -852,4 +852,228 @@
       </root>
     </mxGraphModel>
   </diagram>
+  <diagram id="db1-design-page" name="Database Design">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="db1-title" value="Database Design &#8212; Fitness Tracker (SQLite)" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="40" y="-130" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-legend" value="&lt;b&gt;Key&lt;/b&gt;&lt;br&gt;PK row (blue, bold) = Primary Key&lt;br&gt;FK row (yellow, italic) = Foreign Key&lt;br&gt;Crow's foot: 1 (User) &#8212; ∞ (child records)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="720" y="-130" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- User table -->
+        <mxCell id="db1-User-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="240" height="292" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-hdr" value="User" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r1" value="PK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="40" y="232" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r2" value="username : TEXT (UNIQUE, NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="258" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r3" value="password_hash : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="284" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r4" value="email : TEXT (UNIQUE, NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="310" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r5" value="name : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="336" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r6" value="date_of_birth : DATE" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="362" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r7" value="gender : TEXT" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="388" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r8" value="height_cm : REAL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="414" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r9" value="profile_picture : TEXT" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="440" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-User-r10" value="created_at : DATETIME (DEFAULT now)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="466" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- WorkoutRecord table -->
+        <mxCell id="db1-Workout-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="240" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Workout-hdr" value="WorkoutRecord" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Workout-r1" value="PK  workout_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="72" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Workout-r2" value="FK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=2;strokeColor=none;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="98" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Workout-r3" value="workout_type : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="124" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Workout-r4" value="duration_minutes : INTEGER (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="150" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Workout-r5" value="date : DATE (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="176" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- WeightRecord table -->
+        <mxCell id="db1-Weight-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="222" width="240" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Weight-hdr" value="WeightRecord" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="222" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Weight-r1" value="PK  weight_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="254" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Weight-r2" value="FK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=2;strokeColor=none;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Weight-r3" value="weight_kg : REAL (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="306" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Weight-r4" value="date : DATE (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="332" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- CalorieRecord table -->
+        <mxCell id="db1-Calorie-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="378" width="240" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Calorie-hdr" value="CalorieRecord" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="378" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Calorie-r1" value="PK  calorie_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="410" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Calorie-r2" value="FK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=2;strokeColor=none;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="436" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Calorie-r3" value="calories_consumed : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="462" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Calorie-r4" value="calories_burned : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="488" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Calorie-r5" value="date : DATE (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="514" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- StepRecord table -->
+        <mxCell id="db1-Step-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="560" width="240" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Step-hdr" value="StepRecord" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="560" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Step-r1" value="PK  step_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="592" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Step-r2" value="FK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=2;strokeColor=none;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="618" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Step-r3" value="step_count : INTEGER (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="644" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Step-r4" value="date : DATE (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="670" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- Goal table -->
+        <mxCell id="db1-Goal-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="40" width="240" height="214" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-hdr" value="Goal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="720" y="40" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r1" value="PK  goal_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="720" y="72" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r2" value="FK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=2;strokeColor=none;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="720" y="98" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r3" value="goal_type : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="124" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r4" value="target_value : REAL (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="150" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r5" value="start_value : REAL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="176" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r6" value="start_date : DATE (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="202" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Goal-r7" value="target_date : DATE" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="228" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- Notification table -->
+        <mxCell id="db1-Notif-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="274" width="240" height="188" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-hdr" value="Notification" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="720" y="274" width="240" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-r1" value="PK  notification_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="720" y="306" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-r2" value="FK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=2;strokeColor=none;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="720" y="332" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-r3" value="type : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="358" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-r4" value="message : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="384" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-r5" value="date_created : DATETIME (DEFAULT now)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="410" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-Notif-r6" value="is_read : INTEGER (DEFAULT 0)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="436" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships (crow's foot: 1 User to many child records) -->
+        <mxCell id="db1-rel-workout" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;jettySize=auto;orthogonalLoop=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="db1-User-box" target="db1-Workout-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-rel-weight" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;jettySize=auto;orthogonalLoop=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="db1-User-box" target="db1-Weight-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-rel-calorie" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;jettySize=auto;orthogonalLoop=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="db1-User-box" target="db1-Calorie-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-rel-step" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;jettySize=auto;orthogonalLoop=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="db1-User-box" target="db1-Step-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="db1-rel-goal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;jettySize=auto;orthogonalLoop=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="db1-User-box" target="db1-Goal-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="-30" />
+              <mxPoint x="840" y="-30" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="db1-rel-notif" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;jettySize=auto;orthogonalLoop=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="db1-User-box" target="db1-Notif-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="730" />
+              <mxPoint x="840" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
 </mxfile>

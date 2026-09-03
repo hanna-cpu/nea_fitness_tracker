@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fitness-tracker-reflex",
+      "runtimeExecutable": "powershell.exe",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-Command",
+        "Set-Location fitness_tracker; $env:REFLEX_USE_NPM='1'; & '..\\.venv\\Scripts\\reflex.exe' run"
+      ],
+      "port": 3000
+    }
+  ]
+}

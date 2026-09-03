@@ -1,1 +1,11 @@
 *.bkp
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Reflex
+fitness_tracker/.web/
+*.db
+!database/fitness_tracker.db
