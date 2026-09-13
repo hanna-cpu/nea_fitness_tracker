@@ -115,6 +115,9 @@ class AddFitnessDataState(State):
         except ValueError:
             self.workout_message = "Duration must be a whole number."
             return
+        if duration <= 0:
+            self.workout_message = "Duration must be a positive number."
+            return
         db.add_workout_record(self.user_id, self.workout_type, duration, self.workout_date)
         self.workout_duration = ""
         self.workout_message = ""
@@ -130,6 +133,9 @@ class AddFitnessDataState(State):
             weight = float(self.weight_value)
         except ValueError:
             self.weight_message = "Weight must be a number."
+            return
+        if weight <= 0:
+            self.weight_message = "Weight must be a positive number."
             return
         db.add_weight_record(self.user_id, weight, self.weight_date)
         self.weight_value = ""
@@ -153,6 +159,9 @@ class AddFitnessDataState(State):
         if consumed is None and burned is None:
             self.calories_message = "Enter consumed and/or burned calories."
             return
+        if (consumed is not None and consumed < 0) or (burned is not None and burned < 0):
+            self.calories_message = "Calories cannot be negative."
+            return
         db.add_calorie_record(self.user_id, consumed, burned, self.calories_date)
         self.calories_consumed = ""
         self.calories_burned = ""
@@ -169,6 +178,9 @@ class AddFitnessDataState(State):
             steps = int(self.steps_value)
         except ValueError:
             self.steps_message = "Steps must be a whole number."
+            return
+        if steps < 0:
+            self.steps_message = "Steps cannot be negative."
             return
         db.add_step_record(self.user_id, steps, self.steps_date)
         self.steps_value = ""

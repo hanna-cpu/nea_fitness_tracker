@@ -58,6 +58,9 @@ class FitnessGoalsState(State):
         except ValueError:
             self.message = "Workout duration goal must be a number."
             return
+        if target <= 0:
+            self.message = "Workout duration goal must be a positive number."
+            return
         db.upsert_goal(self.user_id, "workout_duration", target, None, date.today().isoformat(), None)
         self.message = "Goals saved."
 
@@ -67,6 +70,9 @@ class FitnessGoalsState(State):
             target = float(self.weight_goal)
         except ValueError:
             self.message = "Weight goal must be a number."
+            return
+        if target <= 0:
+            self.message = "Weight goal must be a positive number."
             return
         # The weight goal's "start_value" is the user's current weight when
         # the goal is set - used later to calculate % progress towards it.
@@ -83,6 +89,9 @@ class FitnessGoalsState(State):
         except ValueError:
             self.message = "Calories goal must be a number."
             return
+        if target <= 0:
+            self.message = "Calories goal must be a positive number."
+            return
         db.upsert_goal(self.user_id, "calories", target, None, date.today().isoformat(), None)
         self.message = "Goals saved."
 
@@ -92,6 +101,9 @@ class FitnessGoalsState(State):
             target = float(self.steps_goal)
         except ValueError:
             self.message = "Steps goal must be a number."
+            return
+        if target <= 0:
+            self.message = "Steps goal must be a positive number."
             return
         db.upsert_goal(self.user_id, "steps", target, None, date.today().isoformat(), None)
         self.message = "Goals saved."

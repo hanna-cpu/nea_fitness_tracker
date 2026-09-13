@@ -67,6 +67,9 @@ class AccountSettingsState(State):
             except ValueError:
                 self.error = "Height must be a number."
                 return
+            if height_value <= 0:
+                self.error = "Height must be a positive number."
+                return
 
         try:
             db.update_user(
