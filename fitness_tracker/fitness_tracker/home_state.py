@@ -50,25 +50,28 @@ class HomeState(State):
         summary = db.get_progress_summary(self.user_id, today)
         current_weight = db.get_latest_weight(self.user_id) or 0
 
-        # Only fill in a goal's numbers if the user has actually set one -
-        # otherwise the chart card shows "No goal set yet." instead (see
-        # home_page.py's has_*_goal checks... actually handled via target=0).
+        # Today's totals are real regardless of whether a goal has been set
+        # for that metric, so they're always read from the database here.
+        # Only the *target* (and, for weight, the starting point) depends on
+        # a Goal row actually existing - those stay at their default of 0
+        # until the user sets one, which is what makes a card show "x / 0".
+        self.steps_current = summary["steps_today"]
+        self.workout_current = summary["workout_minutes_today"]
+        self.calories_current = summary["calories_burned_today"]
+        self.weight_current = current_weight
+
         if "steps" in goals:
             self.steps_target = goals["steps"]["target_value"]
-            self.steps_current = summary["steps_today"]
 
         if "workout_duration" in goals:
             self.workout_target = goals["workout_duration"]["target_value"]
-            self.workout_current = summary["workout_minutes_today"]
 
         if "calories" in goals:
             self.calories_target = goals["calories"]["target_value"]
-            self.calories_current = summary["calories_burned_today"]
 
         if "weight" in goals:
             self.weight_target = goals["weight"]["target_value"]
             self.weight_start = goals["weight"]["start_value"] or current_weight
-            self.weight_current = current_weight
 
         # Build each chart's data by pulling raw rows from the database and
         # reshaping them into the {"date": ..., <value>: ...} dicts the
