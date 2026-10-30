@@ -25,13 +25,6 @@ def register() -> rx.Component:
                 size="3",
             ),
             rx.input(
-                placeholder="Username",
-                value=RegisterState.reg_username,
-                on_change=RegisterState.set_reg_username,
-                width="100%",
-                size="3",
-            ),
-            rx.input(
                 placeholder="Email",
                 type="email",
                 value=RegisterState.reg_email,

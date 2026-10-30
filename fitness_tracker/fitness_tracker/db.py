@@ -21,11 +21,11 @@ DB_PATH = Path(__file__).resolve().parents[2] / "database" / "fitness_tracker.db
 
 
 class DuplicateUserError(Exception):
-    """Raised when a username or email is already registered."""
+    """Raised when an email is already registered."""
 
 
 class InvalidCredentialsError(Exception):
-    """Raised when a login attempt fails (wrong username or password)."""
+    """Raised when a login attempt fails (wrong email or password)."""
 
 
 def get_connection() -> sqlite3.Connection:
@@ -37,7 +37,7 @@ def get_connection() -> sqlite3.Connection:
     """
     conn = sqlite3.connect(DB_PATH)
     conn.execute("PRAGMA foreign_keys = ON")  # SQLite ignores foreign keys unless told to enforce them
-    conn.row_factory = sqlite3.Row  # lets us read columns by name, e.g. row["username"]
+    conn.row_factory = sqlite3.Row  # lets us read columns by name, e.g. row["email"]
     return conn
 
 
@@ -67,7 +67,6 @@ def _verify_password(password: str, stored: str) -> bool:
 
 
 def create_user(
-    username: str,
     password: str,
     email: str,
     name: str,
@@ -84,35 +83,35 @@ def create_user(
     try:
         cur = conn.execute(
             """
-            INSERT INTO User (username, password_hash, email, name, date_of_birth, gender, height_cm)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO User (password_hash, email, name, date_of_birth, gender, height_cm)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
-            (username, _hash_password(password), email, name, date_of_birth, gender, height_cm),
+            (_hash_password(password), email, name, date_of_birth, gender, height_cm),
         )
         conn.commit()
         return cur.lastrowid
     except sqlite3.IntegrityError as e:
-        # The User table has UNIQUE constraints on username and email, so this
-        # error means one of those is already taken.
-        raise DuplicateUserError("That username or email is already registered.") from e
+        # The User table has a UNIQUE constraint on email, so this error
+        # means that email is already taken.
+        raise DuplicateUserError("That email is already registered.") from e
     finally:
         conn.close()
 
 
-def authenticate_user(username: str, password: str) -> sqlite3.Row:
-    """Check a username/password pair and return the matching User row.
+def authenticate_user(email: str, password: str) -> sqlite3.Row:
+    """Check an email/password pair and return the matching User row.
 
-    Raises InvalidCredentialsError if the username doesn't exist or the
+    Raises InvalidCredentialsError if the email doesn't exist or the
     password is wrong - deliberately the same error either way, so a failed
-    login attempt can't be used to guess which usernames exist.
+    login attempt can't be used to guess which emails are registered.
     """
     conn = get_connection()
     try:
         row = conn.execute(
-            "SELECT * FROM User WHERE username = ?", (username,)
+            "SELECT * FROM User WHERE email = ?", (email,)
         ).fetchone()
         if row is None or not _verify_password(password, row["password_hash"]):
-            raise InvalidCredentialsError("Incorrect username or password.")
+            raise InvalidCredentialsError("Incorrect email or password.")
         return row
     finally:
         conn.close()

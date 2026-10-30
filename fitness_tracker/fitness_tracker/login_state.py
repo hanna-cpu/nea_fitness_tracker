@@ -8,7 +8,7 @@ from .app_state import State
 
 class LoginState(State):
     # These hold whatever the user has typed into the two input boxes.
-    login_username: str = ""
+    login_email: str = ""
     login_password: str = ""
     # Shown as a red error message when a login attempt fails.
     error: str = ""
@@ -16,8 +16,8 @@ class LoginState(State):
     # Reflex used to auto-generate these "set_<var>" functions for every
     # variable, but that's been switched off in this version - so each input
     # box needs its own tiny function to update its variable when typed in.
-    def set_login_username(self, value: str):
-        self.login_username = value
+    def set_login_email(self, value: str):
+        self.login_email = value
 
     def set_login_password(self, value: str):
         self.login_password = value
@@ -27,14 +27,14 @@ class LoginState(State):
         there's no reason to show them the login form again - send them
         straight to Home instead.
         """
-        if self.is_logged_in:
+        if self.user_id > 0:
             return rx.redirect("/home")
 
     def handle_login(self):
         """Runs when the Login button is clicked."""
         self.error = ""
         try:
-            user = db.authenticate_user(self.login_username, self.login_password)
+            user = db.authenticate_user(self.login_email, self.login_password)
         except db.InvalidCredentialsError as e:
             self.error = str(e)
             return
@@ -42,6 +42,6 @@ class LoginState(State):
         # Success: store who's logged in (in the shared State, so every page
         # can see it) and clear the password from memory before leaving.
         self.user_id = user["user_id"]
-        self.username = user["username"]
+        self.name = user["name"]
         self.login_password = ""
         return rx.redirect("/home")

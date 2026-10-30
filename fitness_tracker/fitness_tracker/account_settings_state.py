@@ -39,7 +39,7 @@ class AccountSettingsState(State):
         """Runs when the page loads - fetches the user's current details from
         the database and fills in the form fields with them.
         """
-        if not self.is_logged_in:
+        if self.user_id <= 0:
             return rx.redirect("/login")
         user = db.get_user(self.user_id)
         if user is None:

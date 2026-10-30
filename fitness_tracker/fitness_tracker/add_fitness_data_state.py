@@ -96,7 +96,7 @@ class AddFitnessDataState(State):
         """Runs when the page loads - pre-fills all four date fields with
         today's date, so the user doesn't have to type it in every time.
         """
-        if not self.is_logged_in:
+        if self.user_id <= 0:
             return rx.redirect("/login")
         today = date.today().isoformat()
         self.workout_date = today

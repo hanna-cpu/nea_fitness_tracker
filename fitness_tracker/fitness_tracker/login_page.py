@@ -20,9 +20,10 @@ def login() -> rx.Component:
                 ),
             ),
             rx.input(
-                placeholder="Username",
-                value=LoginState.login_username,
-                on_change=LoginState.set_login_username,  # runs on every keystroke
+                placeholder="Email",
+                type="email",
+                value=LoginState.login_email,
+                on_change=LoginState.set_login_email,  # runs on every keystroke
                 width="100%",
                 size="3",
             ),

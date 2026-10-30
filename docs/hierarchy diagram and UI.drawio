@@ -417,7 +417,7 @@
         <mxCell id="ItLBluMeHKCG-IMd_qxg-39" value="pfp" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ItLBluMeHKCG-IMd_qxg-34" vertex="1">
           <mxGeometry x="80" y="155" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ItLBluMeHKCG-IMd_qxg-40" value="&lt;i&gt;Username&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ItLBluMeHKCG-IMd_qxg-34" vertex="1">
+        <mxCell id="ItLBluMeHKCG-IMd_qxg-40" value="&lt;i&gt;Name&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ItLBluMeHKCG-IMd_qxg-34" vertex="1">
           <mxGeometry x="140" y="155" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ItLBluMeHKCG-IMd_qxg-41" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="ItLBluMeHKCG-IMd_qxg-34" vertex="1">
@@ -865,7 +865,7 @@
         </mxCell>
         <!-- User table -->
         <mxCell id="db1-User-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="40" y="200" width="240" height="292" as="geometry" />
+          <mxGeometry x="40" y="200" width="240" height="266" as="geometry" />
         </mxCell>
         <mxCell id="db1-User-hdr" value="User" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontStyle=1;fontSize=13;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="40" y="200" width="240" height="32" as="geometry" />
@@ -873,32 +873,29 @@
         <mxCell id="db1-User-r1" value="PK  user_id : INTEGER" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontStyle=1;strokeColor=none;fillColor=#dae8fc;" vertex="1" parent="1">
           <mxGeometry x="40" y="232" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r2" value="username : TEXT (UNIQUE, NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r3" value="password_hash : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="258" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r3" value="password_hash : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r4" value="email : TEXT (UNIQUE, NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="284" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r4" value="email : TEXT (UNIQUE, NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r5" value="name : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="310" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r5" value="name : TEXT (NOT NULL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r6" value="date_of_birth : DATE" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="336" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r6" value="date_of_birth : DATE" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r7" value="gender : TEXT" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="362" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r7" value="gender : TEXT" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r8" value="height_cm : REAL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="388" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r8" value="height_cm : REAL" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="db1-User-r9" value="profile_picture : TEXT" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="414" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="db1-User-r9" value="profile_picture : TEXT" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="40" y="440" width="240" height="26" as="geometry" />
-        </mxCell>
         <mxCell id="db1-User-r10" value="created_at : DATETIME (DEFAULT now)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="40" y="466" width="240" height="26" as="geometry" />
+          <mxGeometry x="40" y="440" width="240" height="26" as="geometry" />
         </mxCell>
         <!-- WorkoutRecord table -->
         <mxCell id="db1-Workout-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">

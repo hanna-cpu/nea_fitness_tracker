@@ -1,7 +1,7 @@
 """Shared nav bar shown at the top of every logged-in page.
 
 Not a page itself, so there's no matching nav_bar_state.py - it only reads
-from and calls into the shared app_state.State (logout, username,
+from and calls into the shared app_state.State (logout, name,
 notifications), since navigation and notifications are the same everywhere.
 """
 
@@ -54,7 +54,7 @@ def _notifications_popover() -> rx.Component:
                 variant="soft",
                 # rx.cond picks between the two colours depending on whether
                 # there's anything unread - this is what turns the bell red.
-                color_scheme=rx.cond(State.has_unread_notifications, "red", "gray"),
+                color_scheme=rx.cond(State.notifications.length() > 0, "red", "gray"),
                 radius="full",
                 size="2",
             ),
@@ -63,7 +63,7 @@ def _notifications_popover() -> rx.Component:
             rx.vstack(
                 rx.heading("Notifications", size="3"),
                 rx.cond(
-                    State.has_unread_notifications,
+                    State.notifications.length() > 0,
                     rx.vstack(
                         rx.foreach(State.notifications, _notification_row),
                         width="100%",

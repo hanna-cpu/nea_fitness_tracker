@@ -21,31 +21,19 @@ from . import db
 
 
 class State(rx.State):
-    # 0 means "nobody is logged in" - see is_logged_in below.
+    # 0 means "nobody is logged in" - checked as user_id > 0 wherever it matters.
     user_id: int = 0
-    username: str = ""
+    name: str = ""
     # Unread notifications for the bell icon in the nav bar, e.g.
     # [{"id": 3, "message": "You haven't logged any activity today..."}]
     notifications: list[dict] = []
-
-    @rx.var
-    def is_logged_in(self) -> bool:
-        """A computed value the UI can read directly, e.g. to redirect logged-out
-        users away from a page, or show/hide the "Logout" button.
-        """
-        return self.user_id > 0
-
-    @rx.var
-    def has_unread_notifications(self) -> bool:
-        """Whether the nav bar's bell icon should be shown red."""
-        return len(self.notifications) > 0
 
     def refresh_notifications(self):
         """Re-check for a "you haven't logged anything today" reminder and reload
         the unread notifications list. Called every time a logged-in page loads,
         so the bell icon is always up to date no matter which page you land on.
         """
-        if not self.is_logged_in:
+        if self.user_id <= 0:
             return
         db.ensure_daily_activity_reminder(self.user_id, date.today().isoformat())
         self.notifications = [
@@ -61,6 +49,6 @@ class State(rx.State):
     def logout(self):
         """Clear the session and send the user back to the Login page."""
         self.user_id = 0
-        self.username = ""
+        self.name = ""
         self.notifications = []
         return rx.redirect("/login")

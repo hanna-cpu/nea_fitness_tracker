@@ -21,7 +21,7 @@ class HistoryState(State):
         """Runs when the page loads - fetches all four histories and turns
         the raw database rows into display-ready text.
         """
-        if not self.is_logged_in:
+        if self.user_id <= 0:
             return rx.redirect("/login")
 
         self.workout_history = [

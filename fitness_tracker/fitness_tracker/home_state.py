@@ -42,7 +42,7 @@ class HomeState(State):
         """Runs every time the Home page is opened - loads everything the
         page needs to display: goal progress, chart data, and notifications.
         """
-        if not self.is_logged_in:
+        if self.user_id <= 0:
             return rx.redirect("/login")
 
         goals = db.get_goals(self.user_id)

@@ -35,7 +35,7 @@ These feed a **Notification System**:
 ## 2. Pages (from UI mockups)
 
 ### 2.1 Login
-- Fields: Username, Password
+- Fields: Email, Password
 - Action: Login button
 - Link: "Don't have an account? Sign Up" → Register
 
@@ -44,7 +44,7 @@ These feed a **Notification System**:
 - Action: Register button
 
 ### 2.3 Profile / Account
-- Displays: profile picture, Username, Date of Birth, Gender, Weight, Height
+- Displays: profile picture, Name, Date of Birth, Gender, Weight, Height
 - Logout link
 - Navigation to: Account Settings, Add Fitness Data, Progress Tracker, Fitness Goals
 
@@ -80,7 +80,7 @@ Mirrors the Add Fitness Data layout — one panel per goal type, each with a Sav
 
 These are the entities the database design (next step) needs to cover:
 
-- **User** — identity + profile (name, DOB, gender, weight, height, email, username, password)
+- **User** — identity + profile (name, DOB, gender, weight, height, email, password)
 - **Workout record** — type, duration, date
 - **Weight record** — weight, date
 - **Calorie record** — consumed, burned, date

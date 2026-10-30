@@ -159,7 +159,7 @@ def home() -> rx.Component:
                     spacing="2",
                     align="center",
                 ),
-                rx.text(State.username, size="5", weight="bold"),
+                rx.text(State.name, size="5", weight="bold"),
                 # rx.foreach loops over a list held in state, rendering one
                 # component per item - here, one banner per unread notification.
                 rx.vstack(

@@ -35,7 +35,7 @@ class FitnessGoalsState(State):
         """Runs when the page loads - fills in each field with the user's
         current goal, if they've already set one for that type.
         """
-        if not self.is_logged_in:
+        if self.user_id <= 0:
             return rx.redirect("/login")
         goals = db.get_goals(self.user_id)
         if "workout_duration" in goals:
