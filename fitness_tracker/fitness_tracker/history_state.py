@@ -33,21 +33,27 @@ class HistoryState(State):
             for row in db.get_workout_history(self.user_id)
         ]
 
-        # Weight history also shows the change since the previous entry, so
-        # this one needs a manual loop instead of a one-line list comprehension:
-        # each row is compared against the row right after it in the list
-        # (get_weight_history returns newest-first, so "after" = "older").
+        # The weight table also shows how much the weight changed since the
+        # entry before it. The rows come back newest-first, so the "previous"
+        # entry (the older weigh-in) is the next one along in the list.
         weight_rows = db.get_weight_history(self.user_id)
         weight_list = []
-        for i, row in enumerate(weight_rows):
-            if i + 1 < len(weight_rows):
-                change = row["weight_kg"] - weight_rows[i + 1]["weight_kg"]
-                change_str = f"{change:+.1f} kg"  # the "+" always shows the sign, e.g. "+1.2 kg"
+        for position in range(len(weight_rows)):
+            this_weight = weight_rows[position]["weight_kg"]
+
+            # Work out the change compared with the older entry, if there is one.
+            is_oldest_entry = (position == len(weight_rows) - 1)
+            if is_oldest_entry:
+                change_str = "-"  # nothing older to compare against
             else:
-                change_str = "-"  # the oldest entry has nothing earlier to compare to
+                older_weight = weight_rows[position + 1]["weight_kg"]
+                change = this_weight - older_weight
+                sign = "+" if change >= 0 else "-"  # always show the sign, e.g. "+1.2 kg"
+                change_str = f"{sign}{abs(change):.1f} kg"
+
             weight_list.append({
-                "date": row["date"],
-                "weight": f"{row['weight_kg']:.1f} kg",
+                "date": weight_rows[position]["date"],
+                "weight": f"{this_weight:.1f} kg",
                 "change": change_str,
             })
         self.weight_history = weight_list

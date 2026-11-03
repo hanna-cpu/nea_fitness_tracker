@@ -31,16 +31,14 @@ class LoginState(State):
             return rx.redirect("/home")
 
     def handle_login(self):
-        """Runs when the Login button is clicked."""
+        #Runs when the Login button is clicked
         self.error = ""
         try:
             user = db.authenticate_user(self.login_email, self.login_password)
         except db.InvalidCredentialsError as e:
             self.error = str(e)
             return
-
-        # Success: store who's logged in (in the shared State, so every page
-        # can see it) and clear the password from memory before leaving.
+        # Success: store who's logged in state.
         self.user_id = user["user_id"]
         self.name = user["name"]
         self.login_password = ""

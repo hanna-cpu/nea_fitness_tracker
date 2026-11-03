@@ -44,13 +44,7 @@ def get_connection() -> sqlite3.Connection:
 def _hash_password(password: str, salt: bytes | None = None) -> str:
     """Turn a plain-text password into a salted hash that's safe to store.
 
-    Passwords must never be stored in plain text. Here we:
-    1. Generate a random 16-byte "salt" (or reuse one, when checking a login).
-    2. Run the password through PBKDF2-HMAC-SHA256, 100,000 rounds - this is
-       deliberately slow, which makes brute-forcing stolen hashes much harder.
-    3. Store the salt and the resulting hash together as "saltHex$hashHex",
-       so the salt used for a given user is always available later to
-       re-check a login attempt.
+    Passwords must never be stored in plain text. Instead, a random salt is generated and the password is hashed with it
     """
     salt = salt or os.urandom(16)
     digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 100_000)
